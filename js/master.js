@@ -3,6 +3,7 @@ var root = new Vue ({
 
     data: {
         imgPath: "img/avatar",
+        messageClass: "",
         contacts: [
             {
                 name: 'Michele',
@@ -87,8 +88,15 @@ var root = new Vue ({
                     }
                 ],
             },
-        ], 
-        
+        ],
+        newMessage:"",    
+    },
+
+    methods: {
+        sendMessage() {
+            this.contacts[0].messages.push({data:"", text: this.newMessage, status: "sent"});
+            this.newMessage="";
+        },
         
     },
 

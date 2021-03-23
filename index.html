@@ -49,7 +49,7 @@
             <div class="users_bottom">
                 <div class="user" v-for="(contact, index) in contacts">
                     <img :src="imgPath + contacts[index].avatar" alt="">
-                    <p>{{contacts[index].name}}</p>
+                    <p>{{ contacts[index].name }}</p>
                 </div>
             </div>
 
@@ -72,18 +72,25 @@
             </div>
 
             <div class="chat_middle">
-                <div class="messages_received">
-                    prova
+
+                <div class="message_sent"  v-for="(message, index) in contacts[0].messages" v-if="contacts[0].messages[index].status == 'sent' ">
+                    {{ contacts[0].messages[index].text }}
                 </div>
-                <div class="messages_sent">
-                    prova
+        
+                <div class="message_received" v-for="(message, index) in contacts[0].messages" v-if="contacts[0].messages[index].status == 'received' ">
+                    {{ contacts[0].messages[index].text }}
                 </div>
 
+                <!-- <div :class="messageClass" v-for="(message, index) in contacts[0].messages"  
+                v-if="contacts[0].messages[index].status == 'sent' ? messageClass='message_sent' : messageClass='message_received' ">
+                    {{ contacts[0].messages[index].text }}
+                </div> -->
+               
             </div>
 
             <div class="chat_bottom">
                 <i class="far fa-smile"></i>
-                <input type="text" name="message" id="message" placeholder="Scrivi un messaggio">
+                <input type="text" name="message" id="message" placeholder="Scrivi un messaggio" v-model="newMessage" @keyup.enter="sendMessage">
                 <i class="fas fa-microphone"></i>
             </div>
         </div>
