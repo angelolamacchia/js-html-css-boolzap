@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.12/dist/vue.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Boolzap</title>
+</head>
+
+<body>
+    <div id="root" class="container">
+        <div class="users_container">
+            <div class="users_top">
+
+                <div class="avatar">
+                    <div class="avatar_left">
+                        <img id="avatar" src="img/avatar_io.jpg" alt="">
+                        <h3>Nome utente</h3>
+                    </div>
+                    <div class="avatar_right">
+                        <i class="fas fa-circle-notch"></i>
+                        <i class="fas fa-comment-alt"></i>
+                        <i class="fas fa-ellipsis-v"></i>
+                    </div>
+                </div>
+
+                <div class="notifications">
+                    <i class="fas fa-bell-slash"></i>
+                    <div class="notifications_text">
+                        <h4>Ricevi notifiche di nuovi messaggi</h4>
+                        <a href="#">Attiva notifiche desktop</a>
+                    </div>
+                </div>
+
+                <div class="search">
+                    <div class="wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" name="search" id="search" placeholder="Cerca o inizia una nuova chat">    
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="users_bottom">
+                <div class="user" v-for="(contact, index) in contacts">
+                    <img :src="imgPath + contacts[index].avatar" alt="">
+                    <p>{{contacts[index].name}}</p>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="chat_container">
+            <div class="chat_top">
+                <div class="chat_user_left">
+                    <img id="avatar" src="img/avatar_1.jpg" alt="">
+                    <div class="chat_user_left_text">
+                        <h3>Nome utente</h3>
+                        <p style="color: grey">Ultimo accesso oggi alle</p>
+                    </div>  
+                </div>
+                <div class="chat_user_right">
+                    <i class="fas fa-search"></i>
+                    <i class="fas fa-paperclip"></i>
+                    <i class="fas fa-ellipsis-v"></i>
+                </div>
+            </div>
+
+            <div class="chat_middle">
+                <div class="messages_received">
+                    prova
+                </div>
+                <div class="messages_sent">
+                    prova
+                </div>
+
+            </div>
+
+            <div class="chat_bottom">
+                <i class="far fa-smile"></i>
+                <input type="text" name="message" id="message" placeholder="Scrivi un messaggio">
+                <i class="fas fa-microphone"></i>
+            </div>
+        </div>
+        
+    </div>
+
+
+    <script src="js/master.js"></script>
+</body>
+</html>
