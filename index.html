@@ -19,8 +19,8 @@
 
                 <div class="avatar">
                     <div class="avatar_left">
-                        <img id="avatar" src="img/avatar_io.jpg" alt="">
-                        <h3>Nome utente</h3>
+                        <img id="avatar" :src="imgPath + user.avatar" alt="">
+                        <h3> {{user.name}} </h3>
                     </div>
                     <div class="avatar_right">
                         <i class="fas fa-circle-notch"></i>
@@ -40,14 +40,15 @@
                 <div class="search">
                     <div class="wrapper">
                         <i class="fas fa-search"></i>
-                        <input type="text" name="search" id="search" placeholder="Cerca o inizia una nuova chat">    
+                        <input type="text" name="search" id="search" placeholder="Cerca o inizia una nuova chat" v-model="keyword">    
                     </div>
                 </div>
 
             </div>
             
             <div class="users_bottom">
-                <div class="user" v-for="(contact, index) in contacts">
+                <div class="user" v-for="(contact, index) in contacts" :class="[(counter == index) ? 'active' : null, 
+                (keyword.charAt(0) == contacts[index].name.charAt(0) || keyword == '') ?  'visible' : 'notVisible' ]" @click="counter = index">
                     <img :src="imgPath + contacts[index].avatar" alt="">
                     <p>{{ contacts[index].name }}</p>
                 </div>
@@ -58,9 +59,9 @@
         <div class="chat_container">
             <div class="chat_top">
                 <div class="chat_user_left">
-                    <img id="avatar" src="img/avatar_1.jpg" alt="">
+                    <img id="avatar" :src="imgPath + contacts[counter].avatar" alt="">
                     <div class="chat_user_left_text">
-                        <h3>Nome utente</h3>
+                        <h3>{{ contacts[counter].name }}</h3>
                         <p style="color: grey">Ultimo accesso oggi alle</p>
                     </div>  
                 </div>
@@ -72,19 +73,13 @@
             </div>
 
             <div class="chat_middle">
-
-                <div class="message_sent"  v-for="(message, index) in contacts[0].messages" v-if="contacts[0].messages[index].status == 'sent' ">
-                    {{ contacts[0].messages[index].text }}
+                <div class="message">
+                    <div  v-for="(message, index) in contacts[counter].messages"  
+                    :class="[(contacts[counter].messages[index].status == 'sent') ? 'message_sent' : 'message_received' ]">
+                    {{ contacts[counter].messages[index].text }}
+                    </div>
                 </div>
-        
-                <div class="message_received" v-for="(message, index) in contacts[0].messages" v-if="contacts[0].messages[index].status == 'received' ">
-                    {{ contacts[0].messages[index].text }}
-                </div>
-
-                <!-- <div :class="messageClass" v-for="(message, index) in contacts[0].messages"  
-                v-if="contacts[0].messages[index].status == 'sent' ? messageClass='message_sent' : messageClass='message_received' ">
-                    {{ contacts[0].messages[index].text }}
-                </div> -->
+                
                
             </div>
 

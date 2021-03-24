@@ -3,7 +3,10 @@ var root = new Vue ({
 
     data: {
         imgPath: "img/avatar",
-        messageClass: "",
+        user: {
+            name: "Angelo Lama",
+            avatar: "_io.jpg"
+        },
         contacts: [
             {
                 name: 'Michele',
@@ -89,15 +92,32 @@ var root = new Vue ({
                 ],
             },
         ],
-        newMessage:"",    
+        newMessage:"",
+        counter: 0,
+        keyword:"",
+        // classVisible: "",
+           
     },
 
     methods: {
         sendMessage() {
-            this.contacts[0].messages.push({data:"", text: this.newMessage, status: "sent"});
+            this.contacts[this.counter].messages.push({data:"", text: this.newMessage, status: "sent"});
             this.newMessage="";
+            setTimeout(()=>{ 
+                this.contacts[this.counter].messages.push({data:"", text: "Ok", status: "received"}); 
+            }, 1000);
         },
-        
+        // searchContact() {
+        //     for (let i=0; i<this.contacts.length; i++) {
+        //         if (this.keyword == this.contacts[i].name || this.keyword == '') {
+        //             this.classVisible='visible';
+        //         } else {
+        //             this.classVisible='notVisible';
+        //         }
+        // //     }
+
+        // }
+
     },
 
 
