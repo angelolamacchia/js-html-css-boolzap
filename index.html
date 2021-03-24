@@ -48,7 +48,8 @@
             
             <div class="users_bottom">
                 <div class="user" v-for="(contact, index) in contacts" :class="[(counter == index) ? 'active' : null, 
-                (keyword.charAt(0) == contacts[index].name.charAt(0) || keyword == '') ?  'visible' : 'notVisible' ]" @click="counter = index">
+                (keyword.slice(0,keyword.length).toLowerCase() == contacts[index].name.slice(0,keyword.length).toLowerCase() || keyword == '') ?  'visible' : 'notVisible' ]" 
+                @click="counter = index">
                     <img :src="imgPath + contacts[index].avatar" alt="">
                     <p>{{ contacts[index].name }}</p>
                 </div>

@@ -95,7 +95,6 @@ var root = new Vue ({
         newMessage:"",
         counter: 0,
         keyword:"",
-        // classVisible: "",
            
     },
 
@@ -107,16 +106,6 @@ var root = new Vue ({
                 this.contacts[this.counter].messages.push({data:"", text: "Ok", status: "received"}); 
             }, 1000);
         },
-        // searchContact() {
-        //     for (let i=0; i<this.contacts.length; i++) {
-        //         if (this.keyword == this.contacts[i].name || this.keyword == '') {
-        //             this.classVisible='visible';
-        //         } else {
-        //             this.classVisible='notVisible';
-        //         }
-        // //     }
-
-        // }
 
     },
 
