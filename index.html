@@ -19,7 +19,7 @@
 
                 <div class="avatar">
                     <div class="avatar_left">
-                        <img id="avatar" :src="imgPath + user.avatar" alt="">
+                        <img id="avatar" :src="imgPath + user.avatar + formatJpg" alt="">
                         <h3> {{user.name}} </h3>
                     </div>
                     <div class="avatar_right">
@@ -50,7 +50,7 @@
                 <div class="user" v-for="(contact, index) in contacts" :class="[(counter == index) ? 'active' : null, 
                 (keyword.slice(0,keyword.length).toLowerCase() == contacts[index].name.slice(0,keyword.length).toLowerCase() || keyword == '') ?  'visible' : 'notVisible' ]" 
                 @click="counter = index">
-                    <img :src="imgPath + contacts[index].avatar" alt="">
+                    <img :src="imgPath + contacts[index].avatar + formatJpg" alt="">
                     <p>{{ contacts[index].name }}</p>
                 </div>
             </div>
@@ -60,7 +60,7 @@
         <div class="chat_container">
             <div class="chat_top">
                 <div class="chat_user_left">
-                    <img id="avatar" :src="imgPath + contacts[counter].avatar" alt="">
+                    <img id="avatar" :src="imgPath + contacts[counter].avatar + formatJpg" alt="">
                     <div class="chat_user_left_text">
                         <h3>{{ contacts[counter].name }}</h3>
                         <p style="color: grey">Ultimo accesso oggi alle</p>
@@ -74,14 +74,20 @@
             </div>
 
             <div class="chat_middle">
-                <div class="message">
+                <div class="messages">
                     <div  v-for="(message, index) in contacts[counter].messages"  
-                    :class="[(contacts[counter].messages[index].status == 'sent') ? 'message_sent' : 'message_received' ]">
-                    {{ contacts[counter].messages[index].text }}
+                    :class="(contacts[counter].messages[index].status == 'sent') ? 'message_sent' : 'message_received' ">
+                        <span class="message_text"> 
+                            {{ contacts[counter].messages[index].text }} 
+                            <span @click="clickPopup(index)"><i class="fas fa-chevron-down"></i></span>
+                            <div class="cancel_popup" :class="activePopup">
+                                <p>Message info</p>
+                                <p @click="deleteMessage(index)">Delete message</p>
+                            </div>
+                        </span>
+                        <span class="message_date"> {{ contacts[counter].messages[index].date }} </span>
                     </div>
                 </div>
-                
-               
             </div>
 
             <div class="chat_bottom">

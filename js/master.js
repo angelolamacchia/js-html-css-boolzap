@@ -3,14 +3,15 @@ var root = new Vue ({
 
     data: {
         imgPath: "img/avatar",
+        formatJpg: ".jpg",
         user: {
             name: "Angelo Lama",
-            avatar: "_io.jpg"
+            avatar: "_io"
         },
         contacts: [
             {
                 name: 'Michele',
-                avatar: '_1.jpg',
+                avatar: '_1',
                 visible: true,
                 messages: [
                     {
@@ -32,7 +33,7 @@ var root = new Vue ({
             },
             {
                 name: 'Fabio',
-                avatar: '_2.jpg',
+                avatar: '_2',
                 visible: true,
                 messages: [
                     {
@@ -54,7 +55,7 @@ var root = new Vue ({
             },
             {
                 name: 'Samuele',
-                avatar: '_3.jpg',
+                avatar: '_3',
                 visible: true,
                 messages: [
                     {
@@ -76,7 +77,7 @@ var root = new Vue ({
             },
             {
                 name: 'Luisa',
-                avatar: '_4.jpg',
+                avatar: '_4',
                 visible: true,
                 messages: [
                     {
@@ -95,16 +96,54 @@ var root = new Vue ({
         newMessage:"",
         counter: 0,
         keyword:"",
-           
+        activePopup: "",  
+        
     },
 
     methods: {
+        formatted_date() {
+            function addZero(i) {
+                if (i < 10) {
+                  i = "0" + i;
+                }
+                return i;
+            };
+
+            var today = new Date();
+            var dd = String(today.getDate()).padStart(2, '0');
+            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = today.getFullYear();
+            var h = addZero(today.getHours());
+            var m = addZero(today.getMinutes());
+            var s = addZero(today.getSeconds());
+
+            today = dd + '/' + mm + '/' + yyyy + " " + h + ":" + m + ":" + s;
+            return today;
+        },
+        
         sendMessage() {
-            this.contacts[this.counter].messages.push({data:"", text: this.newMessage, status: "sent"});
+
+            this.contacts[this.counter].messages.push({date: this.formatted_date(), text: this.newMessage, status: "sent"});
             this.newMessage="";
+            
             setTimeout(()=>{ 
-                this.contacts[this.counter].messages.push({data:"", text: "Ok", status: "received"}); 
+                this.contacts[this.counter].messages.push({date: this.formatted_date(), text: "Ok", status: "received"}); 
             }, 1000);
+        },
+
+        clickPopup(index) {
+            console.log(index);
+             
+            if (this.activePopup == "active") {
+                this.activePopup = "";
+            } else {
+                this.activePopup = "active";
+            }     
+        },
+
+        deleteMessage(index) {
+            this.contacts[this.counter].messages.splice(index, 1);
+            this.activePopup = "";
         },
 
     },
