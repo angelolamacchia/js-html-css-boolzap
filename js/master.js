@@ -95,13 +95,14 @@ var root = new Vue ({
         ],
         newMessage:"",
         counter: 0,
-        keyword:"",
-        activePopup: "",  
+        keyword:"", 
+        messageCounter: "",
+        messagePopup: "", 
         
     },
 
     methods: {
-        formatted_date() {
+        formatted_date() { /*funzione per inserire la data*/
             function addZero(i) {
                 if (i < 10) {
                   i = "0" + i;
@@ -111,7 +112,7 @@ var root = new Vue ({
 
             var today = new Date();
             var dd = String(today.getDate()).padStart(2, '0');
-            var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var mm = String(today.getMonth() + 1).padStart(2, '0');
             var yyyy = today.getFullYear();
             var h = addZero(today.getHours());
             var m = addZero(today.getMinutes());
@@ -121,7 +122,7 @@ var root = new Vue ({
             return today;
         },
         
-        sendMessage() {
+        sendMessage() {/*funzione per inviare/ricevere messaggi*/
 
             this.contacts[this.counter].messages.push({date: this.formatted_date(), text: this.newMessage, status: "sent"});
             this.newMessage="";
@@ -131,19 +132,26 @@ var root = new Vue ({
             }, 1000);
         },
 
-        clickPopup(index) {
+        clickPopup(index) {/*funzione per popup*/
             console.log(index);
+            this.messageCounter = this.contacts[this.counter].messages[index];
              
-            if (this.activePopup == "active") {
-                this.activePopup = "";
+            if (this.messagePopup == "active") {
+                this.messagePopup = "";
+                this.messageCounter = "";
             } else {
-                this.activePopup = "active";
-            }     
+                this.messagePopup = "active";
+            };  
         },
 
-        deleteMessage(index) {
+        deleteMessage(index) {/*funzione cancella messaggio*/
             this.contacts[this.counter].messages.splice(index, 1);
+
+            //alternativa al messaggio cancellato
+            // this.contacts[this.counter].messages[index].text = "questo messaggio è stato cancellato";
+
             this.activePopup = "";
+            this.messageCounter = "";
         },
 
     },

@@ -14,7 +14,7 @@
 
 <body>
     <div id="root" class="container">
-        <div class="users_container">
+        <div class="users_container"> <!--barra di sinistra con i contatti-->
             <div class="users_top">
 
                 <div class="avatar">
@@ -57,7 +57,7 @@
 
         </div>
 
-        <div class="chat_container">
+        <div class="chat_container"> <!--barra di destra con le chat-->
             <div class="chat_top">
                 <div class="chat_user_left">
                     <img id="avatar" :src="imgPath + contacts[counter].avatar + formatJpg" alt="">
@@ -76,11 +76,12 @@
             <div class="chat_middle">
                 <div class="messages">
                     <div  v-for="(message, index) in contacts[counter].messages"  
-                    :class="(contacts[counter].messages[index].status == 'sent') ? 'message_sent' : 'message_received' ">
+                    :class="(contacts[counter].messages[index].status == 'sent') ? 'message_sent' : 'message_received' " 
+                    @click="clickPopup(index)">
                         <span class="message_text"> 
                             {{ contacts[counter].messages[index].text }} 
-                            <span @click="clickPopup(index)"><i class="fas fa-chevron-down"></i></span>
-                            <div class="cancel_popup" :class="activePopup">
+                            <span><i class="fas fa-chevron-down"></i></span>
+                            <div class="cancel_popup" :class="contacts[counter].messages[index] == messageCounter ? messagePopup='active' : null">
                                 <p>Message info</p>
                                 <p @click="deleteMessage(index)">Delete message</p>
                             </div>
