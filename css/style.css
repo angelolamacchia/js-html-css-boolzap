@@ -112,7 +112,6 @@ body {
 }
 
 .users_container .users_bottom .user  {
-    display: flex;
     padding: 10px;
     border-bottom: 1px solid #eaeaea;
 }
@@ -222,7 +221,7 @@ body {
 .message_sent {
     position: relative;
     width: 300px;
-    height: 60px;
+    min-height: 60px;
     padding: 0 20px;
     margin: 10px 0;
     clear: both;
@@ -233,6 +232,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow-wrap: break-word; 
 }
 .message_sent:after
 {
@@ -251,7 +251,7 @@ body {
 .message_received {
     position: relative;
     width: 300px;
-    height: 60px;
+    min-height: 60px;
     padding: 0 20px;
     margin: 10px 0;
     clear: both;
@@ -262,6 +262,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    overflow-wrap: break-word; 
 }
 .message_received:after {
     content: '';

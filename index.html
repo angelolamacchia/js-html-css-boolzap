@@ -51,7 +51,13 @@
                 (keyword.slice(0,keyword.length).toLowerCase() == contacts[index].name.slice(0,keyword.length).toLowerCase() || keyword == '') ?  'visible' : 'notVisible' ]" 
                 @click="counter = index">
                     <img :src="imgPath + contacts[index].avatar + formatJpg" alt="">
-                    <p>{{ contacts[index].name }}</p>
+                    <div>
+                        {{ contacts[index].name }}
+                        <p style="color: grey">
+                            <!-- Ultimo accesso {{ contacts[index].messages[contacts[index].messages.length-1].date }} -->
+                            {{ lastAccess(index) }}
+                        </p>
+                    </div>
                 </div>
             </div>
 
@@ -60,10 +66,10 @@
         <div class="chat_container"> <!--barra di destra con le chat-->
             <div class="chat_top">
                 <div class="chat_user_left">
-                    <img id="avatar" :src="imgPath + contacts[counter].avatar + formatJpg" alt="">
+                    <img id="avatar" :src="imgPath + contacts[counter].avatar + formatJpg">
                     <div class="chat_user_left_text">
                         <h3>{{ contacts[counter].name }}</h3>
-                        <p style="color: grey">Ultimo accesso oggi alle</p>
+                        <p style="color: grey"> {{ lastAccessActive() }} </p>
                     </div>  
                 </div>
                 <div class="chat_user_right">

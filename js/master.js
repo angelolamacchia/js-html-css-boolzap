@@ -97,7 +97,7 @@ var root = new Vue ({
         counter: 0,
         keyword:"", 
         messageCounter: "",
-        messagePopup: "", 
+        messagePopup: "",
         
     },
 
@@ -130,10 +130,11 @@ var root = new Vue ({
             setTimeout(()=>{ 
                 this.contacts[this.counter].messages.push({date: this.formatted_date(), text: "Ok", status: "received"}); 
             }, 1000);
+
+            // this.scrollMessages();
         },
 
         clickPopup(index) {/*funzione per popup*/
-            console.log(index);
             this.messageCounter = this.contacts[this.counter].messages[index];
              
             if (this.messagePopup == "active") {
@@ -152,6 +153,26 @@ var root = new Vue ({
 
             this.activePopup = "";
             this.messageCounter = "";
+        },
+
+        lastAccessActive() {
+            let msgLength = this.contacts[this.counter].messages.length;
+            
+            if (this.contacts[this.counter].messages[msgLength-1].status == "received") {
+                return "Ultimo accesso " + this.contacts[this.counter].messages[msgLength-1].date;
+            } else {
+                return "Ultimo accesso " + this.contacts[this.counter].messages[msgLength-2].date;
+            }
+        },
+
+        lastAccess(index) {
+            let msgLength = this.contacts[index].messages.length;
+            
+            if (this.contacts[index].messages[msgLength-1].status == "received") {
+                return "Ultimo accesso " + this.contacts[index].messages[msgLength-1].date;
+            } else {
+                return "Ultimo accesso " + this.contacts[index].messages[msgLength-2].date;
+            }    
         },
 
     },
