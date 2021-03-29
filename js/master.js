@@ -94,8 +94,8 @@ var root = new Vue ({
             },
         ],
         newMessage:"",
-        counter: 0,
-        keyword:"", 
+        counter: 0, //degli utenti
+        keyword:"", //della ricerca utenti
         messageCounter: "",
         messagePopup: "",
         
@@ -160,9 +160,9 @@ var root = new Vue ({
             
             if (this.contacts[this.counter].messages[msgLength-1].status == "received") {
                 return "Ultimo accesso " + this.contacts[this.counter].messages[msgLength-1].date;
-            } else {
+            } else if (this.contacts[this.counter].messages[msgLength-1].status == "sent") {
                 return "Ultimo accesso " + this.contacts[this.counter].messages[msgLength-2].date;
-            }
+            }; 
         },
 
         lastAccess(index) {
@@ -170,9 +170,10 @@ var root = new Vue ({
             
             if (this.contacts[index].messages[msgLength-1].status == "received") {
                 return "Ultimo accesso " + this.contacts[index].messages[msgLength-1].date;
-            } else {
+            } 
+            else if (this.contacts[index].messages[msgLength-1].status == "sent") {
                 return "Ultimo accesso " + this.contacts[index].messages[msgLength-2].date;
-            }    
+            };  
         },
 
     },
